@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 
 app.use(bodyParser.json());
 
-
 mongoose.connect("mongodb+srv://gabrieldamato:senha@cluster0-3cyc4.mongodb.net/test?retryWrites=true&w=majority", {
     useNewUrlParser: true, useUnifiedTopology: true
 }, () =>{
@@ -20,15 +19,19 @@ app.post("/produto", (req,res) => {
     });
 
     produto.save().then(() => {
-        res.status.Code = 201
+        console.log("Deu erro" + JSON.stringify(erro));
+        res.res.status(200).json(produto);
         res.send();
     }).catch((erro) => {
         if(erro){
+            console.log("Deu erro" + JSON.stringify(erro));
             throw erro;
         }
+        console.log("Deu erro" + JSON.stringify(erro));
         res.statusCode = 417;
         res.send();    
     })
+    console.log("Teste");
 });
 
 app.listen(8080,() => {
